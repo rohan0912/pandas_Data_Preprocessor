@@ -6,3 +6,12 @@ Pandas_Data_Preprocessor! This interactive web application simplifies the proces
 Upload CSV Files: Users can easily upload their CSV files to the web application.
 Perform Pandas Operations: Through our intuitive UI, perform various operations like sorting, filtering, column operations, and more.
 Download Processed Files: After processing, the modified CSV files can be downloaded with just a click.
+
+## Upload Page
+
+![My Image](static/images/View 1.jpg)
+
+
+## Main Page
+
+![My Image](static/images/View 2.jpg)
