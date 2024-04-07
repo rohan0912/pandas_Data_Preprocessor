@@ -1,0 +1,115 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    --x: calc(var(--posX, 0) * 1px);
+    --y: calc(var(--posY, 0) * 1px);
+    background-image:
+        linear-gradient(115deg, rgb(211 255 215), rgb(0 0 0)),
+        radial-gradient( 90% 100% at calc( 50% + var(--x)) calc( 0% + var(--y)), rgb(200 200 200), rgb(022 000 045)),
+        radial-gradient(100% 100% at calc( 80% - var(--x)) calc( 0% - var(--y)), rgb(250 255 000), rgb(036 000 000)),
+        radial-gradient(150% 210% at calc(100% + var(--x)) calc( 0% + var(--y)), rgb(020 175 125), rgb(000 010 255)),
+        radial-gradient(100% 100% at calc(100% - var(--x)) calc(30% - var(--y)), rgb(255 077 000), rgb(000 200 255)),
+        linear-gradient(60deg, rgb(255 000 000), rgb(120 086 255));
+    background-blend-mode: overlay, overlay, difference, difference, difference, normal;
+}
+
+header {
+    width: 100%;
+    background-color: transparent;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 150px; /* Adjust based on your logo size */
+}
+
+.logo-container img {
+    margin: 10px;
+    height: 120px;
+    border-radius: 10px;/* Adjust based on your logo size */
+    /* Add more styling here if needed */
+}
+
+.transparent-img {
+    opacity: 0.7;
+}
+
+.container {
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.5); /* Adjust the last number for opacity */
+    color: white; /* Assuming you want white text */
+    padding: 50px;
+    border-radius: 5px; /* Optional, for rounded corners */
+}
+
+.upload-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.custom-file-upload {
+    display: inline-block;
+    padding: 10px 20px;
+    cursor: pointer;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+.upload-btn {
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.upload-btn:hover, .custom-file-upload:hover {
+    opacity: 0.9;
+}
+
+.file-name {
+    font-style: italic;
+    /* Add more styles as needed */
+}
+
+
+.drop_zone:hover,
+.drop_zone.dragover {
+    background-color: rgba(191, 198, 229, 0.29); /* Light background on hover */
+}
+.drop_zone p {
+    margin: 0;
+    font-size: 16px;
+}
+
+.drop_zone {
+  height: 20px;
+  width: 400px;
+  border: 2px dashed #009688;
+  border-radius: 5px;
+  padding: 50px;
+  text-align: center;
+  color: #009688;
+  margin-bottom: 20px; /* Added margin for spacing */
+}

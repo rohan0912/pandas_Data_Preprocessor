@@ -1,0 +1,229 @@
+/* rtyle.css */
+.message {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    padding: 10px 0;
+    z-index: 2000;
+    font-size: 20px;
+    animation: slideDown 0.5s ease-out forwards, fadeOut 0.5s 5.5s forwards;
+}
+
+.success-message {
+    background-color: #28a745;
+    color: white;
+}
+
+.error-message {
+    background-color: #dc3545;
+    color: white;
+}
+
+.success-message {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #28a745;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    z-index: 2000;
+    font-size: 20px;
+    animation: slideDown 0.5s ease-out forwards, fadeOut 0.5s 5.5s forwards;
+}
+
+@keyframes slideDown {
+    from { top: -50px; }
+    to { top: 0; }
+}
+
+@keyframes fadeOut {
+    to { opacity: 0; }
+}
+
+body {
+    font-family: Roboto, sans-serif;
+    margin: 0;
+    padding: 0;
+    /*display: flex; */
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f5f5f5;
+}
+
+.main-cont {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Keeps the header at the top, main content in center, and footer at the bottom */
+    min-height: 53vh; /* Ensures the body takes at least the full height of the viewport */
+    font-family: Roboto, sans-serif;
+
+    background-color: black;
+    align-items: center;
+}
+
+.flex-containerr {
+        background: black;
+        display: flex;
+        justify-content: left;
+        /*align-items: flex-start;  Adjust if you prefer a different alignment */
+        /*padding: 20px;*/
+        /*width: 100%;  Ensure the container takes full width */
+}
+
+.data-summar {
+            background-color: #00253b;
+            color: white;
+            flex: 20%; /* Allocate 30% of the width */
+            margin-top: 25px;
+            margin-bottom: 10px;
+            margin-right: 10px;
+            margin-left: 25px;
+            padding: 20px;
+            border: 2px solid #94ffa4;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.mis-tablee {
+            background-color: #00253b;
+            color: white;
+            flex: 80%; /* Allocate 70% of the width */
+            margin-top: 25px;
+            margin-bottom: 10px;
+            margin-right: 25px;
+            margin-left: 10px;
+            padding: 20px;
+            border: 2px solid #94ffa4;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            overflow-x: auto; /* Enable horizontal scrolling within this container */
+}
+
+table {
+            color: black;
+            background: white;
+            border-collapse: collapse;
+            width: auto; /* Allows the table to grow as wide as it needs */
+}
+
+th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+}
+
+tr:hover {background-color: #D6EEEE;}
+
+.total-missing-valuess {
+    text-align: left; /* Align the total missing values text */
+}
+
+/* Make sure the main content expands to push the footer (your button) to the bottom */
+.blocks-container {
+    flex: 1; /* This should already be making your main content area grow and push the footer down */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    /*padding: 20px;*/
+}
+
+.download-csv-container {
+    background: black;
+    margin-top: auto; /* This will push the container to the bottom */
+    width: 100%;
+    text-align: center;
+    padding: 20px 0; /* Adjust padding to your preference */
+}
+
+.download-csv-button {
+    display: inline-block;
+    width: 90%; /* Adjust to take the full width accounting for padding/margins */
+    padding: 15px 0; /* Adjust padding to your preference */
+    background-color: green;
+    color: white;
+    text-decoration: none;
+    font-size: 18px; /* Adjust font size to your preference */
+    border: none;
+    cursor: pointer;
+}
+
+
+
+
+.block {
+    width: 450px;
+    height: 86px;
+    background-color: #16293d;
+    text-align: center;
+    line-height: 86px;
+    margin: 20px;
+    cursor: pointer;
+    border-radius: 8px;
+    border-style: double;
+    border-color: #94ffa4;
+    color: #94ffa4;
+    font-weight: 500;
+    box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
+    transition: background-color 0.3s, box-shadow 0.3s;
+    position: relative; /* For popup positioning */
+}
+
+.block:hover {
+    background-color: white;
+    color: black;
+    box-shadow: 0 7px 14px rgba(50, 50, 93, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08);
+}
+.popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.5); /* Initial transform for animation */
+    background-color: #6b7280;
+    padding: 40px; /* Increased padding for inner spacing */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    text-align: center;
+    border-radius: 10px;
+    transition: transform 0.4s, opacity 0.4s;
+    z-index: 1000;
+    width: 40%; /* Adjusted width for a larger popup */
+    max-width: 500px; /* Maximum width to maintain aesthetics on larger screens */
+}
+
+button {
+    display: block;
+    width: 60%; /* Adjusted for a more centered and proportionate appearance */
+    margin: 20px auto; /* Increased margin for better vertical spacing */
+    padding: 15px 20px; /* Larger padding for a more clickable area */
+    cursor: pointer;
+    border: none;
+    border-radius: 8px; /* Slightly rounded corners for a modern look */
+    font-size: 18px; /* Larger font size for better readability */
+    font-weight: 500; /* Medium font weight for emphasis */
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+button:hover {
+    transform: translateY(-2px); /* Subtle hover effect for interactivity */
+}
+
+#removeValuesBtn {
+    background-color: #FF4136;
+    color: white;
+}
+
+#uploadCsvBtn {
+    background-color: #2ECC40;
+    color: white;
+}
+
+
+
+
