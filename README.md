@@ -9,9 +9,9 @@ Download Processed Files: After processing, the modified CSV files can be downlo
 
 ## Upload Page
 
-![My Image](static/images/View 1.jpg)
+![Upload_Page](static/images/View_1.jpg)
 
 
 ## Main Page
 
-![My Image](static/images/View 2.jpg)
+![Main_Page](static/images/View_2.jpg)
