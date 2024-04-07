@@ -197,5 +197,64 @@
         </script>
         {% endif %}
 <script src="{{ url_for('static', filename='js/tcript.js') }}"></script>
+<script>
+    document.addEventListener('mousemove', function(e) {
+            // Calculate the mouse position as a fraction of the viewport size
+            const x = e.clientX - (window.innerWidth / 2);
+            const y = e.clientY - (window.innerHeight / 2);
+
+            // Update CSS variables on the body element
+            document.body.style.setProperty('--posX', x.toString());
+            document.body.style.setProperty('--posY', y.toString());
+        });
+    // JavaScript for drag and drop functionality
+    const dropZone = document.getElementById('drop_zone');
+    const fileInput = document.getElementById('file-upload');
+
+    ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+      dropZone.addEventListener(eventName, preventDefaults, false);
+      document.body.addEventListener(eventName, preventDefaults, false);
+    });
+
+    ['dragenter', 'dragover'].forEach(eventName => {
+      dropZone.addEventListener(eventName, highlight, false);
+    });
+
+    ['dragleave', 'drop'].forEach(eventName => {
+      dropZone.addEventListener(eventName, unhighlight, false);
+    });
+
+    dropZone.addEventListener('drop', handleDrop, false);
+
+    function preventDefaults(e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+
+    function highlight(e) {
+      dropZone.classList.add('highlight');
+    }
+
+    function unhighlight(e) {
+      dropZone.classList.remove('highlight');
+    }
+
+    function handleDrop(e) {
+      let dt = e.dataTransfer;
+      let files = dt.files;
+
+      fileInput.files = files;
+      handleFiles(files);
+    }
+
+    function handleFiles(files) {
+      ([...files]).forEach(uploadFile);
+    }
+
+    function uploadFile(file) {
+      // You can implement the upload logic or file processing here
+      console.log('File you dragged:', file.name);
+    }
+</script>
 </body>
 </html>
