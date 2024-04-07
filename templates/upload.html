@@ -1,0 +1,95 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload CSV File</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/utyle.css') }}">
+</head>
+<body>
+<header>
+    <div class="logo-container">
+        <img src="{{ url_for('static', filename='images/logo.jpg') }}" alt="Your Logo" class="transparent-img">
+    </div>
+</header>
+<div class="container">
+    <h2>Upload CSV File</h2>
+
+    <!-- Drag and Drop Area -->
+    <div class="drop_zone">Drop files here or click to upload.</div>
+
+    <form method="post" enctype="multipart/form-data" class="upload-form">
+        <label for="file-upload" class="custom-file-upload">
+            Choose file
+        </label>
+        <input id="file-upload" type="file" name="file">
+        {% if filename %}
+        <span class="file-name" style="font-style: italic;">{{ filename }}</span>
+        {% endif %}
+        <button type="submit" value="Upload" class="upload-btn">Upload</button>
+    </form>
+</div>
+
+<script>
+    document.addEventListener('mousemove', function(e) {
+            // Calculate the mouse position as a fraction of the viewport size
+            const x = e.clientX - (window.innerWidth / 2);
+            const y = e.clientY - (window.innerHeight / 2);
+
+            // Update CSS variables on the body element
+            document.body.style.setProperty('--posX', x.toString());
+            document.body.style.setProperty('--posY', y.toString());
+        });
+    // JavaScript for drag and drop functionality
+    const dropZone = document.getElementById('drop_zone');
+    const fileInput = document.getElementById('file-upload');
+
+    ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+      dropZone.addEventListener(eventName, preventDefaults, false);
+      document.body.addEventListener(eventName, preventDefaults, false);
+    });
+
+    ['dragenter', 'dragover'].forEach(eventName => {
+      dropZone.addEventListener(eventName, highlight, false);
+    });
+
+    ['dragleave', 'drop'].forEach(eventName => {
+      dropZone.addEventListener(eventName, unhighlight, false);
+    });
+
+    dropZone.addEventListener('drop', handleDrop, false);
+
+    function preventDefaults(e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+
+    function highlight(e) {
+      dropZone.classList.add('highlight');
+    }
+
+    function unhighlight(e) {
+      dropZone.classList.remove('highlight');
+    }
+
+    function handleDrop(e) {
+      let dt = e.dataTransfer;
+      let files = dt.files;
+
+      fileInput.files = files;
+      handleFiles(files);
+    }
+
+    function handleFiles(files) {
+      ([...files]).forEach(uploadFile);
+    }
+
+    function uploadFile(file) {
+      // You can implement the upload logic or file processing here
+      console.log('File you dragged:', file.name);
+    }
+</script>
+
+</body>
+</html>

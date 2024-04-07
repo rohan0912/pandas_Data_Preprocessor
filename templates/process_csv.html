@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Popup Example</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/rtyle.css') }}">
+</head>
+<body>
+        <div class="flex-containerr">
+            <!-- Dataset Summary Section -->
+            <div class="data-summar">
+                <h2>Dataset Summary</h2>
+                <p>Number of Columns: {{ num_columns }}</p>
+                <p>Number of Rows: {{ num_rows }}</p>
+                <p>Number of Duplicate Values: {{ num_duplicates }}</p>
+            </div>
+
+            <!-- Missing Values by Column Section -->
+            <div class="mis-tablee">
+                <h2>Column Missing Values</h2>
+                    <table>
+                        <tr>
+                            {% for column_info in columns_missing_values %}
+                                <th>{{ column_info.Column }}</th>
+                            {% endfor %}
+                        </tr>
+                        <tr>
+                            {% for column_info in columns_missing_values %}
+                                <td>{{ column_info['Missing Values'] }}</td>
+                            {% endfor %}
+                        </tr>
+                    </table>
+                    <p class="total-missing-valuess">Total Missing Values: {{ total_missing_values }}</p>
+            </div>
+        </div>
+        {% if processed %}
+        <div id="successMessage" class="message success-message">OPERATION SUCCESSFUL</div>
+        <script src="{{ url_for('static', filename='js/tcript.js') }}"></script>
+        {% endif %}
+
+        {% if error_message %}
+        <div id="errorMessage" class="message error-message">{{ error_message }}</div>
+        <script src="{{ url_for('static', filename='js/tcript.js') }}"></script>
+        {% endif %}
+        <div class="main-cont">
+            <div class="blocks-container">
+                <div class="block" id="block1">REMOVE MISSING RECORDS</div>
+                <div class="popup" id="popup1">
+                    <form method="POST">
+                        <button type="submit" name="action" value="remove_missing">Remove missing values</button>
+                    </form>
+                </div>
+
+                <!-- Repeat for each block -->
+                <div class="block" id="block2">RENAME COLUMNS</div>
+                <div class="popup" id="popup2">
+                    <form method="POST">
+                        <label for="old_column_name">Current Column Name:</label>
+                        <select id="old_column_name" name="old_column_name" required>
+                            {% for columns_list in columns_list %}
+                                <option value="{{ columns_list }}">{{ columns_list }}</option>
+                            {% endfor %}
+                        </select><br><br>
+
+                        <label for="new_column_name">New Column Name:</label>
+                        <input type="text" id="new_column_name" name="new_column_name" required>
+
+                        <button type="submit" name="action" value="rename_column">Rename Column</button>
+                    </form>
+                </div>
+                <div class="block" id="block3">REMOVE DUPLICATE VALUES</div>
+                <div class="popup" id="popup3">
+                    <form method="POST">
+                        <button type="submit" name="action" value="remove_duplicates">Remove Duplicate Values</button>
+                    </form>
+                </div>
+
+                <!-- Repeat for each block -->
+                <div class="block" id="block4">CONVERT DATATYPE</div>
+                <div class="popup" id="popup4">
+                    <form method="POST">
+                        <label for="column_name">Column Name:</label>
+                        <input type="text" id="column_name" name="column_name" required>
+
+                        <label for="target_datatype">Target Datatype:</label>
+                        <select id="target_datatype" name="target_datatype" required>
+                            <option value="int">Integer</option>
+                            <option value="float">Float</option>
+                            <option value="str">String</option>
+                            <option value="bool">Boolean</option>
+                        </select>
+
+                        <button type="submit" name="action" value="convert_datatype">Convert Datatype</button>
+                    </form>
+                </div>
+
+
+                <div class="block" id="block5">REPLACE MISSING VALUES WITH</div>
+                <div class="popup" id="popup5">
+                    <form method="POST">
+                        <label for="column_name_replace">Column Name:</label>
+                        <select id="column_name_replace" name="column_name" required>
+                            {% for columns_list in columns_list %}
+                                <option value="{{ columns_list }}">{{ columns_list }}</option>
+                            {% endfor %}
+                        </select>
+
+
+                        <label for="replacement_method">Replacement Method:</label>
+                        <select id="replacement_method" name="replacement_method" required>
+                            <option value="mean">Mean</option>
+                            <option value="median">Median</option>
+                            <option value="mode">Mode</option>
+                        </select>
+
+                        <button type="submit" name="action" value="replace_missing_with">Replace Missing Values</button>
+                    </form>
+                </div>
+
+                <!-- Repeat for each block -->
+                <div class="block" id="block6">CONVERT DATETIME FORMAT</div>
+                <div class="popup" id="popup6">
+                    <form method="POST">
+                        <label for="datetime_column_name">Column Name:</label>
+                        <input type="text" id="datetime_column_name" name="datetime_column_name" required>
+
+                        <label for="datetime_format">Datetime Format:</label>
+                        <select id="datetime_format" name="datetime_format" required>
+                            <option value="%Y-%m-%d">YYYY-MM-DD</option>
+                            <option value="%m/%d/%Y">MM/DD/YYYY</option>
+                            <option value="%Y-%m-%d %H:%M:%S">YYYY-MM-DD HH:MM:SS</option>
+                            <option value="%d-%m-%Y %H:%M">DD-MM-YYYY HH:MM</option>
+                            <option value="%B %d, %Y">Month DD, YYYY</option>
+                            <option value="%Y-%m-%dT%H:%M:%SZ">ISO 8601</option>
+                            <option value="unix">Unix Timestamp</option>
+                        </select>
+
+                        <button type="submit" name="action" value="convert_datetime_format">Convert Datetime Format</button>
+                    </form>
+                </div>
+
+
+                <div class="block" id="block7">NORMALIZATION</div>
+                <div class="popup" id="popup7">
+                    <form method="POST">
+                        <label for="column_name_norm">Column Name:</label>
+                        <input type="text" id="column_name_norm" name="column_name_norm" required>
+                        <button type="submit" name="action" value="norm">Normalize</button>
+                    </form>
+                </div>
+
+                <div class="block" id="block8">STANDARDIZATION</div>
+                <div class="popup" id="popup8">
+                    <form method="POST">
+                        <label for="column_name_stand">Column Name:</label>
+                        <input type="text" id="column_name_stand" name="column_name_stand" required>
+                        <button type="submit" name="action" value="stand">Standardize</button>
+                    </form>
+                </div>
+
+                <div class="block" id="block9">DROP COLUMNS</div>
+                <div class="popup" id="popup9">
+                    <form method="POST">
+                        <label for="column_drop">Column Name:</label>
+                        <select id="column_drop" name="column_drop" required>
+                            {% for columns_list in columns_list %}
+                                <option value="{{ columns_list }}">{{ columns_list }}</option>
+                            {% endfor %}
+                        </select>
+
+                        <button type="submit" name="action" value="drop_column">Drop Column</button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+        <div class="download-csv-container">
+                <a href="{{ url_for('download_file', filename=cleaned_filename) }}" class="download-csv-button" download="filename.csv">DOWNLOAD CSV</a>
+        </div>
+        {% if processed %}
+        <div id="successMessage" class="message success-message">Operation Successful!</div>
+        <script>
+            document.getElementById('successMessage').style.display = 'block';
+            setTimeout(function() {
+                document.getElementById('successMessage').style.display = 'none';
+            }, 6000);
+        </script>
+        {% endif %}
+
+        {% if error_message %}
+        <div id="errorMessage" class="message error-message">{{ error_message }}</div>
+        <script>
+            document.getElementById('errorMessage').style.display = 'block';
+            setTimeout(function() {
+                document.getElementById('errorMessage').style.display = 'none';
+            }, 6000);
+        </script>
+        {% endif %}
+<script src="{{ url_for('static', filename='js/tcript.js') }}"></script>
+</body>
+</html>
